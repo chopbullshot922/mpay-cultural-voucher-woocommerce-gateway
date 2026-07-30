@@ -2,15 +2,16 @@
 
 [![English](assets/language/english-active.svg)](README.md) [![Romana](assets/language/romanian-inactive.svg)](README.ro.md)
 
-# WooCommerce Gateway for Moldova MPay and Cultural Voucher Integrations
+# WooCommerce Gateway for Moldova MPay and Cultural Voucher
 
-Developed by TerabitLab to support wider MPay adoption and make Moldova MPay and Cultural Voucher integrations easier for merchants and developers using WordPress and WooCommerce.
+[![Version](https://img.shields.io/badge/version-14.3.2-blue.svg)](../../releases) [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4.svg)](https://php.net) [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759B.svg)](https://wordpress.org) [![WooCommerce](https://img.shields.io/badge/WooCommerce-6.0%2B-96588A.svg)](https://woocommerce.com) [![License](https://img.shields.io/badge/license-source--available-orange.svg)](LICENSE)
 
----
+**Production-ready WooCommerce payment gateway for MPay Moldova and Cultural Voucher.**
+Complete SOAP/WS-Security integration with X.509 certificate signing, built for real-world merchant use.
 
-## Download
+Developed by [TerabitLab](mailto:incontact@terabitlab.com).
 
-The latest version is available as a ready-to-install WordPress plugin ZIP in the [Releases](../../releases) section. Download, upload to your WordPress site, and activate.
+<a href="../../releases"><img src="https://img.shields.io/badge/Download_Plugin_ZIP-v14.3.2-success?style=for-the-badge" alt="Download"></a>
 
 ---
 
