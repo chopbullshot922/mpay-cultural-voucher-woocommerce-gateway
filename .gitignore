@@ -22,3 +22,4 @@ Thumbs.db
 .vscode/
 *.swp
 *.bak
+release/

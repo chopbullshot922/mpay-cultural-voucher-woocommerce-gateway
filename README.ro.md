@@ -6,9 +6,13 @@
 
 Dezvoltat de TerabitLab pentru a sprijini adoptarea MPay și pentru a simplifica integrările MPay Moldova și Voucher Cultural pentru comercianții și dezvoltatorii care folosesc WordPress și WooCommerce.
 
-## Ce face acest plugin
+---
 
-Acesta este un gateway funcțional de plată WooCommerce care conectează magazinele online la sistemul de plăți MPay Moldova și la programul Voucher Cultural. Gestionează ciclul complet de plată: redirecționarea clientului, verificarea plății prin SOAP cu semnături digitale XML WS-Security și actualizarea automată a statusului comenzii.
+## Descărcare
+
+Ultima versiune este disponibilă ca ZIP WordPress gata de instalat în secțiunea [Releases](../../releases). Descărcați, încărcați în WordPress și activați.
+
+---
 
 ## Cum funcționează fluxul de plată
 
@@ -18,6 +22,129 @@ Acesta este un gateway funcțional de plată WooCommerce care conectează magazi
 4. MPay apelează endpoint-ul SOAP al magazinului cu GetOrderDetails. Magazinul răspunde cu datele comenzii.
 5. După plată, MPay apelează ConfirmOrderPayment pe endpoint-ul magazinului. Magazinul înregistrează plata și actualizează comanda WooCommerce.
 6. ReturnUrl readuce browserul în magazin. Aceasta este doar informativă și nu confirmă plata.
+
+![Flux plată](assets/diagrams/mpay-woocommerce-payment-flow.svg)
+
+---
+
+## Instalare
+
+1. Descărcați ZIP-ul pluginului din [Releases](../../releases)
+2. În admin WordPress: **Plugin-uri > Adaugă nou > Încarcă plugin**
+3. Selectați fișierul ZIP și apăsați **Instalează acum**
+4. Apăsați **Activează pluginul**
+5. Mergeți la **MPay Gateway** în meniul admin WordPress
+
+Fără programare, fără FTP, fără editare de fișiere.
+
+---
+
+## Configurare: mediul de TEST
+
+După activare, configurați totul din pagina de administrare a pluginului:
+
+| Pas | Unde în plugin | Ce trebuie făcut |
+|-----|---------------|-----------------|
+| 1 | Dropdown profil | Selectați **store_test** sau **terabitlab_test** |
+| 2 | Service ID | Introduceți Service ID-ul de test primit de la MPay |
+| 3 | Tab WS-Security | Încărcați certificatul PFX de test și introduceți parola |
+| 4 | Tab WS-Security | Încărcați certificatul public MPay de test |
+| 5 | Tab detalii bancare | Introduceți detaliile bancare de test (beneficiar, IBAN, cod fiscal) |
+| 6 | Salvare | Apăsați Salvare modificări |
+| 7 | Testare | Plasați o comandă mică folosind MPay la checkout |
+
+<img src="assets/screenshots/02-production-profile-and-serviceid.png" alt="Configurare profil și Service ID" width="800">
+
+<img src="assets/screenshots/06-ws-security-certificate-settings.png" alt="Setări certificate WS-Security" width="800">
+
+---
+
+## Configurare: mediul de PRODUCȚIE
+
+Când MPay confirmă că integrarea de test este aprobată:
+
+| Pas | Unde în plugin | Ce trebuie făcut |
+|-----|---------------|-----------------|
+| 1 | Dropdown profil | Comutați pe **store_prod** |
+| 2 | Service ID | Introduceți Service ID-ul de producție de la MPay |
+| 3 | Tab WS-Security | Încărcați certificatul PFX de producție de la STISC și parola |
+| 4 | Tab WS-Security | Încărcați certificatul public MPay de producție |
+| 5 | Tab detalii bancare | Introduceți detaliile bancare reale |
+| 6 | HTTPS | Confirmați că domeniul are certificat HTTPS valid |
+| 7 | Salvare și verificare | Salvați, apoi plasați o tranzacție reală de sumă mică |
+
+**Înainte de producție aveți nevoie de:**
+- Certificat de sistem de producție de la STISC (vezi [Documentația certificate](docs/ro/05-certificate.md))
+- Service ID de producție de la MPay
+- Certificatul public MPay de producție
+- HTTPS pe domeniu
+- Aprobarea MPay a integrării de test
+
+Toată configurarea se face din pagina de setări a pluginului. Nu sunt necesare modificări de cod.
+
+---
+
+## Interfața admin a pluginului
+
+### Setări principale
+
+<img src="assets/screenshots/01-wordpress-admin-menu-entry.png" alt="Intrare meniu admin WordPress" width="700">
+
+<img src="assets/screenshots/03-general-gateway-settings.png" alt="Setări generale gateway" width="800">
+
+### Cont bancar și reguli de plată
+
+<img src="assets/screenshots/04-merchant-bank-account-settings.png" alt="Setări cont bancar" width="800">
+
+<img src="assets/screenshots/05-payment-rule-settings.png" alt="Setări reguli plată" width="800">
+
+### Setări facturare și PDF
+
+<img src="assets/screenshots/07-invoice-api-and-pdf-settings.png" alt="Setări API factură și PDF" width="700">
+
+### Eligibilitate WooCommerce
+
+<img src="assets/screenshots/08-woocommerce-eligibility-conditions.png" alt="Condiții eligibilitate" width="700">
+
+<img src="assets/screenshots/09-woocommerce-eligibility-and-test-overrides.png" alt="Eligibilitate și suprascrieri test" width="700">
+
+---
+
+## Monitorizare și diagnosticare
+
+### Log și sănătate
+
+<img src="assets/screenshots/10-log-and-health-overview.png" alt="Prezentare log și sănătate" width="800">
+
+<img src="assets/screenshots/11-debug-event-log.png" alt="Log evenimente debug" width="700">
+
+<img src="assets/screenshots/12-event-history-and-monitoring-controls.png" alt="Istoric evenimente și monitorizare" width="700">
+
+### Panou diagnosticare
+
+<img src="assets/screenshots/14-diagnostics-dashboard-overview.png" alt="Panou diagnosticare" width="800">
+
+<img src="assets/screenshots/15-soap-runtime-and-orderkey-inspector.png" alt="Inspector SOAP runtime" width="700">
+
+<img src="assets/screenshots/16-structured-debug-event-stream.png" alt="Flux structurat evenimente debug" width="700">
+
+### Playbook depanare
+
+<img src="assets/screenshots/17-mpay-troubleshooting-playbook-scenarios-1-to-4.png" alt="Scenarii depanare" width="700">
+
+<img src="assets/screenshots/18-mpay-troubleshooting-playbook-ws-security-toolkit.png" alt="Toolkit WS-Security" width="700">
+
+### Statistici
+
+<img src="assets/screenshots/19-mpay-statistics-dashboard.png" alt="Panou statistici" width="800">
+
+---
+
+## Informații plugin
+
+<img src="assets/screenshots/13-plugin-information-and-attribution.png" alt="Informații plugin" width="600">
+
+---
 
 ## Funcționalități
 
@@ -48,34 +175,15 @@ Acesta este un gateway funcțional de plată WooCommerce care conectează magazi
 - Certificat X.509 valid (obținut în procesul de onboarding MPay)
 - HTTPS pe domeniu
 
-## Instalare
+## Documentație
 
-1. Încărcați folderul pluginului în wp-content/plugins/
-2. Activați pluginul în admin WordPress
-3. Accesați pagina de setări MPay (link-ul Settings apare pe pagina de pluginuri)
-4. Selectați un profil de configurare sau folosiți Custom
-5. Configurați Service ID
-6. Configurați căile certificatelor și parola
-7. Configurați detaliile bancare (beneficiar, cod bancă, cod fiscal, IBAN)
-8. Testați cu o tranzacție mică în mediul de test
-
-## Configurare
-
-Toate setarile sunt gestionate prin pagina de setari admin (meniul MPay Gateway din WordPress admin). Pluginul suporta profile de configurare pentru medii de test si productie.
-
-## Documentatie
-
-Documentatie completa bilingva: [English](docs/en/README.md) | [Romana](docs/ro/README.md)
+Documentație completă bilingvă: [English](docs/en/README.md) | [Romana](docs/ro/README.md)
 
 Documente cheie:
-- [Certificate si procedura STISC](docs/ro/05-certificate.md) - ce trebuie obtinut, cum, intrebari de pus
-- [Flux plata si checklist productie](docs/ro/06-flux-plata.md) - fluxul complet, cerinte MPay
+- [Certificate și procedura STISC](docs/ro/05-certificate.md) - ce trebuie obținut, cum, întrebări de pus
+- [Flux plată și checklist producție](docs/ro/06-flux-plata.md) - fluxul complet, cerințe MPay
 - [WS-Security](docs/ro/08-ws-security.md) - flux criptografic, reguli XML-DSig
-- [Depanare](docs/ro/13-depanare.md) - probleme frecvente si depanare avansata
-
-## Diagrama flux plata
-
-![Flux plata](assets/diagrams/mpay-woocommerce-payment-flow.svg)
+- [Depanare](docs/ro/13-depanare.md) - probleme frecvente și depanare avansată
 
 ## Structura pluginului
 
@@ -160,13 +268,12 @@ Pentru implementare, contactați [incontact@terabitlab.com](mailto:incontact@ter
 
 ## Licență
 
-Source-available, utilizare comerciala restrictionata. Gratuit pentru evaluare, studiu si testare.
+Source-available, utilizare comercială restricționată. Gratuit pentru evaluare, studiu și testare.
 
-Utilizarea comerciala pe propriul magazin necesita notificare prin email la [incontact@terabitlab.com](mailto:incontact@terabitlab.com) inainte de lansare. Instalari pentru agentii, multi-site si clienti necesita licenta comerciala.
+Utilizarea comercială pe propriul magazin necesită notificare prin email la [incontact@terabitlab.com](mailto:incontact@terabitlab.com) înainte de lansare. Instalări pentru agenții, multi-site și clienți necesită licență comercială.
 
-Vezi [LICENSE](LICENSE) pentru termeni completi.
+Vezi [LICENSE](LICENSE) pentru termeni compleți.
 
 ## Program referral
 
-Castiga comision 15% referind noi clienti comerciali la TerabitLab. Vezi [referral/PROGRAM.md](referral/PROGRAM.md) pentru detalii si formulare.
-
+Câștigă comision 15% referind noi clienți comerciali la TerabitLab. Vezi [referral/PROGRAM.md](referral/PROGRAM.md) pentru detalii și formulare.

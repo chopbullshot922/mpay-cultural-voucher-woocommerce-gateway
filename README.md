@@ -6,9 +6,13 @@
 
 Developed by TerabitLab to support wider MPay adoption and make Moldova MPay and Cultural Voucher integrations easier for merchants and developers using WordPress and WooCommerce.
 
-## What this plugin does
+---
 
-This is a functional WooCommerce payment gateway that connects online stores to Moldova MPay payment system and Cultural Voucher program. It handles the complete payment lifecycle: customer redirect, SOAP-based payment verification with WS-Security XML digital signatures, and automatic order status updates.
+## Download
+
+The latest version is available as a ready-to-install WordPress plugin ZIP in the [Releases](../../releases) section. Download, upload to your WordPress site, and activate.
+
+---
 
 ## How the payment flow works
 
@@ -18,6 +22,129 @@ This is a functional WooCommerce payment gateway that connects online stores to 
 4. MPay calls the store SOAP endpoint with GetOrderDetails. The store responds with order data.
 5. After payment, MPay calls ConfirmOrderPayment on the store endpoint. The store records payment and updates the WooCommerce order.
 6. ReturnUrl brings the browser back to the store. This is informational only and does not confirm payment.
+
+![Payment Flow](assets/diagrams/mpay-woocommerce-payment-flow.svg)
+
+---
+
+## Installation
+
+1. Download the plugin ZIP from [Releases](../../releases)
+2. In WordPress admin: **Plugins > Add New > Upload Plugin**
+3. Select the ZIP file and click **Install Now**
+4. Click **Activate Plugin**
+5. Go to **MPay Gateway** in the WordPress admin menu
+
+No programming, no FTP, no file editing required.
+
+---
+
+## Setup: TEST environment
+
+After activation, configure everything from the plugin admin page:
+
+| Step | Where in plugin | What to do |
+|------|----------------|------------|
+| 1 | Profile dropdown | Select **store_test** or **terabitlab_test** |
+| 2 | Service ID | Enter the test Service ID provided by MPay |
+| 3 | WS-Security tab | Upload the test PFX certificate and enter the passphrase |
+| 4 | WS-Security tab | Upload the MPay test public certificate |
+| 5 | Bank details tab | Enter test bank details (beneficiary, IBAN, fiscal code) |
+| 6 | Save | Click Save Changes |
+| 7 | Test | Place a small order using MPay at checkout |
+
+<img src="assets/screenshots/02-production-profile-and-serviceid.png" alt="Profile and Service ID configuration" width="800">
+
+<img src="assets/screenshots/06-ws-security-certificate-settings.png" alt="WS-Security certificate settings" width="800">
+
+---
+
+## Setup: PRODUCTION environment
+
+When MPay confirms your test integration is approved:
+
+| Step | Where in plugin | What to do |
+|------|----------------|------------|
+| 1 | Profile dropdown | Switch to **store_prod** |
+| 2 | Service ID | Enter the production Service ID from MPay |
+| 3 | WS-Security tab | Upload the STISC production PFX certificate and passphrase |
+| 4 | WS-Security tab | Upload the MPay production public certificate |
+| 5 | Bank details tab | Enter real bank details |
+| 6 | HTTPS | Confirm your domain has a valid HTTPS certificate |
+| 7 | Save and verify | Save, then place a real small-amount transaction |
+
+**Before production you need:**
+- A production system certificate from STISC (see [Certificate documentation](docs/en/05-certificates.md))
+- Production Service ID from MPay
+- MPay production public certificate
+- HTTPS on your domain
+- MPay approval of your test integration
+
+All configuration is done from the plugin settings page. No code changes needed.
+
+---
+
+## Plugin Admin Interface
+
+### Main Settings
+
+<img src="assets/screenshots/01-wordpress-admin-menu-entry.png" alt="WordPress admin menu entry" width="700">
+
+<img src="assets/screenshots/03-general-gateway-settings.png" alt="General gateway settings" width="800">
+
+### Bank Account and Payment Rules
+
+<img src="assets/screenshots/04-merchant-bank-account-settings.png" alt="Bank account settings" width="800">
+
+<img src="assets/screenshots/05-payment-rule-settings.png" alt="Payment rule settings" width="800">
+
+### Invoice and PDF Settings
+
+<img src="assets/screenshots/07-invoice-api-and-pdf-settings.png" alt="Invoice API and PDF settings" width="700">
+
+### WooCommerce Eligibility
+
+<img src="assets/screenshots/08-woocommerce-eligibility-conditions.png" alt="Eligibility conditions" width="700">
+
+<img src="assets/screenshots/09-woocommerce-eligibility-and-test-overrides.png" alt="Eligibility and test overrides" width="700">
+
+---
+
+## Monitoring and Diagnostics
+
+### Log and Health
+
+<img src="assets/screenshots/10-log-and-health-overview.png" alt="Log and health overview" width="800">
+
+<img src="assets/screenshots/11-debug-event-log.png" alt="Debug event log" width="700">
+
+<img src="assets/screenshots/12-event-history-and-monitoring-controls.png" alt="Event history and monitoring" width="700">
+
+### Diagnostics Dashboard
+
+<img src="assets/screenshots/14-diagnostics-dashboard-overview.png" alt="Diagnostics dashboard" width="800">
+
+<img src="assets/screenshots/15-soap-runtime-and-orderkey-inspector.png" alt="SOAP runtime inspector" width="700">
+
+<img src="assets/screenshots/16-structured-debug-event-stream.png" alt="Structured debug event stream" width="700">
+
+### Troubleshooting Playbook
+
+<img src="assets/screenshots/17-mpay-troubleshooting-playbook-scenarios-1-to-4.png" alt="Troubleshooting scenarios" width="700">
+
+<img src="assets/screenshots/18-mpay-troubleshooting-playbook-ws-security-toolkit.png" alt="WS-Security toolkit" width="700">
+
+### Statistics
+
+<img src="assets/screenshots/19-mpay-statistics-dashboard.png" alt="Statistics dashboard" width="800">
+
+---
+
+## Plugin Information
+
+<img src="assets/screenshots/13-plugin-information-and-attribution.png" alt="Plugin information" width="600">
+
+---
 
 ## Features
 
@@ -48,21 +175,6 @@ This is a functional WooCommerce payment gateway that connects online stores to 
 - Valid X.509 certificate (obtained during MPay merchant onboarding)
 - HTTPS on the domain
 
-## Installation
-
-1. Upload the plugin folder to wp-content/plugins/
-2. Activate the plugin in WordPress admin
-3. Go to the MPay settings page (Settings link appears on the plugins page)
-4. Select a configuration profile or use Custom
-5. Configure your Service ID
-6. Configure certificate paths and passphrase
-7. Configure bank details (beneficiary, bank code, fiscal code, IBAN)
-8. Test with a small transaction in the test environment
-
-## Configuration
-
-All settings are managed through the admin settings page (MPay Gateway menu in WordPress admin). The plugin supports configuration profiles for test and production environments.
-
 ## Documentation
 
 Complete bilingual documentation: [English](docs/en/README.md) | [Romana](docs/ro/README.md)
@@ -72,10 +184,6 @@ Key documents:
 - [Payment flow and production checklist](docs/en/06-payment-flow.md) - complete flow, MPay requirements
 - [WS-Security](docs/en/08-ws-security.md) - cryptographic flow, XML-DSig rules
 - [Troubleshooting](docs/en/13-troubleshooting.md) - common issues and deep debugging
-
-## Payment flow diagram
-
-![Payment Flow](assets/diagrams/mpay-woocommerce-payment-flow.svg)
 
 ## Plugin structure
 
@@ -169,4 +277,3 @@ See [LICENSE](LICENSE) for full terms.
 ## Referral Program
 
 Earn 15% commission by referring new commercial customers to TerabitLab. See [referral/PROGRAM.md](referral/PROGRAM.md) for details and claim forms.
-
