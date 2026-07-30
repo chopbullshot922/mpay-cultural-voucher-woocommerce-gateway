@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="system-ui, -apple-system, sans-serif" font-size="13">
+  <!-- Background -->
+  <rect width="800" height="520" fill="#fafafa" rx="8"/>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">MPay WooCommerce Payment Flow</text>
+
+  <!-- Actors -->
+  <rect x="40" y="60" width="120" height="36" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="100" y="83" text-anchor="middle" font-weight="600" fill="#1976d2">Customer</text>
+
+  <rect x="240" y="60" width="120" height="36" rx="6" fill="#e8f5e9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="300" y="83" text-anchor="middle" font-weight="600" fill="#388e3c">WooCommerce</text>
+
+  <rect x="440" y="60" width="120" height="36" rx="6" fill="#e8f5e9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="500" y="83" text-anchor="middle" font-weight="600" fill="#388e3c">Plugin SOAP</text>
+
+  <rect x="640" y="60" width="120" height="36" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
+  <text x="700" y="83" text-anchor="middle" font-weight="600" fill="#e65100">MPay</text>
+
+  <!-- Lifelines -->
+  <line x1="100" y1="96" x2="100" y2="500" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="300" y1="96" x2="300" y2="500" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="500" y1="96" x2="500" y2="500" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="700" y1="96" x2="700" y2="500" stroke="#90a4ae" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Step 1: Checkout -->
+  <line x1="100" y1="130" x2="295" y2="130" stroke="#1976d2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="198" y="124" text-anchor="middle" fill="#333" font-size="11">1. Place order (checkout)</text>
+
+  <!-- Step 2: Redirect -->
+  <line x1="300" y1="165" x2="105" y2="165" stroke="#388e3c" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="198" y="159" text-anchor="middle" fill="#333" font-size="11">2. HTTP POST form</text>
+  <text x="198" y="175" text-anchor="middle" fill="#666" font-size="10">(ServiceID, OrderKey, ReturnUrl)</text>
+
+  <!-- Step 3: Browser to MPay -->
+  <line x1="100" y1="210" x2="695" y2="210" stroke="#1976d2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="400" y="204" text-anchor="middle" fill="#333" font-size="11">3. Browser submits POST to MPay</text>
+
+  <!-- Step 4: Customer pays -->
+  <rect x="640" y="230" width="120" height="24" rx="4" fill="#fff8e1" stroke="#f9a825" stroke-width="1"/>
+  <text x="700" y="246" text-anchor="middle" fill="#333" font-size="11">4. Customer pays</text>
+
+  <!-- Step 5: GetOrderDetails -->
+  <line x1="700" y1="280" x2="505" y2="280" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <text x="600" y="274" text-anchor="middle" fill="#333" font-size="11">5. SOAP: GetOrderDetails</text>
+  <text x="600" y="292" text-anchor="middle" fill="#666" font-size="10">(WS-Security signed)</text>
+
+  <!-- Step 5 response -->
+  <line x1="500" y1="315" x2="695" y2="315" stroke="#388e3c" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <text x="600" y="309" text-anchor="middle" fill="#333" font-size="11">Response: order data</text>
+
+  <!-- Step 6: ConfirmOrderPayment -->
+  <line x1="700" y1="355" x2="505" y2="355" stroke="#e65100" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <text x="600" y="349" text-anchor="middle" fill="#333" font-size="11">6. SOAP: ConfirmOrderPayment</text>
+  <text x="600" y="367" text-anchor="middle" fill="#666" font-size="10">(WS-Security signed)</text>
+
+  <!-- Step 6: Plugin updates order -->
+  <line x1="500" y1="390" x2="305" y2="390" stroke="#388e3c" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="400" y="384" text-anchor="middle" fill="#333" font-size="11">7. Mark order as paid</text>
+  <text x="400" y="402" text-anchor="middle" fill="#666" font-size="10">(idempotent, transient lock)</text>
+
+  <!-- Step 6 response -->
+  <line x1="500" y1="425" x2="695" y2="425" stroke="#388e3c" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <text x="600" y="419" text-anchor="middle" fill="#333" font-size="11">Response: confirmation</text>
+
+  <!-- Step 7: ReturnUrl -->
+  <line x1="700" y1="465" x2="105" y2="465" stroke="#e65100" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow-orange)"/>
+  <text x="400" y="459" text-anchor="middle" fill="#333" font-size="11">8. ReturnUrl redirect (informational only)</text>
+
+  <!-- Thank you -->
+  <line x1="100" y1="490" x2="295" y2="490" stroke="#1976d2" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="198" y="484" text-anchor="middle" fill="#333" font-size="11">9. Thank you page</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1976d2"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#388e3c"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#e65100"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,24 @@
+*.pfx
+*.p12
+*.pem
+*.cer
+*.crt
+*.key
+*.der
+*.jks
+*.env
+.env*
+vendor/
+node_modules/
+certs-prod/
+Certificatele MPay de test/
+certificate de productie/
+*.log
+*.sql
+*.sqlite
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.bak

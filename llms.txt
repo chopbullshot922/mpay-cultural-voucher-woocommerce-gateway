@@ -1,0 +1,46 @@
+# MPay Cultural Voucher WooCommerce Gateway
+
+> WooCommerce payment gateway plugin for MPay Cultural Voucher payments in Moldova.
+
+## Overview
+
+This WordPress plugin integrates WooCommerce stores with the MPay payment system for Cultural Voucher transactions. It handles the full payment lifecycle: redirect to MPay, SOAP callbacks (GetOrderDetails, ConfirmOrderPayment), WS-Security XML signature verification and signing, and order status management.
+
+## Architecture
+
+- Payment flow: customer clicks Pay, store generates HTTP POST form redirecting to MPay with ServiceID and OrderKey, MPay calls back the store SOAP endpoint
+- SOAP server receives GetOrderDetails (returns order amount, description) and ConfirmOrderPayment (marks order paid)
+- WS-Security: incoming SOAP requests are signature-verified using MPay public certificate; outgoing responses are signed with the store PKCS#12 private key
+- Certificate formats: PKCS#12 (.pfx/.p12), read via PHP OpenSSL or CLI fallback
+- Idempotent confirmation: transient-based locking prevents double-processing
+
+## Key Files
+
+- mpay-voucher-gateway.php: main plugin file, autoloader, activation hooks
+- includes/Woo/Gateway_MPay.php: WC_Payment_Gateway subclass
+- includes/Core/Rewrites.php: endpoint registration, HTTP POST redirect form
+- includes/Soap/Server.php: SOAP callback handler
+- includes/Soap/WsSecurity.php: WS-Security sign and verify
+- includes/Core/OrderMapper.php: order data mapping and payment confirmation
+- includes/functions-helpers.php: settings, profiles, certificate utilities
+- includes/Admin/Settings.php: admin settings page with tabs
+
+## Requirements
+
+- WordPress 5.8+
+- WooCommerce 6.0+
+- PHP 7.4+ with OpenSSL and SOAP extensions
+- Valid PKCS#12 certificate (from STISC for production, or MPay-provided for test)
+
+## Documentation
+
+- docs/en/ - English documentation (15 files)
+- docs/ro/ - Romanian documentation (15 files)
+
+## License
+
+Source-available, restricted commercial use. Free to evaluate and test. Commercial use requires email notification to incontact@terabitlab.com. Agency deployments require commercial license.
+
+## Contact
+
+TerabitLab - incontact@terabitlab.com

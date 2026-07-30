@@ -1,0 +1,82 @@
+MPay Cultural Voucher WooCommerce Gateway
+Copyright (c) 2024-2026 TerabitLab (Victor Luncasu)
+
+SOURCE-AVAILABLE LICENSE - RESTRICTED COMMERCIAL USE
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use
+and study the Software for evaluation and educational purposes, subject to the
+following conditions:
+
+1. EVALUATION AND EDUCATIONAL USE
+   You may download, read, study, and test the Software in a local or staging
+   environment without charge. This includes running the plugin with test
+   credentials for evaluation purposes.
+
+2. COMMERCIAL USE - SINGLE BUSINESS ONLY
+   Commercial use (processing real payments on a live store) is permitted ONLY
+   for the licensee's own single business. This means:
+   - You may use the Software on your own store for your own business
+   - You may NOT install or configure the Software for third parties
+   - You may NOT use the Software as part of a service offered to clients
+   - You may NOT operate the Software on behalf of another entity
+   - Agencies, freelancers, and developers who wish to deploy this Software
+     for their clients must obtain a commercial license
+
+3. MANDATORY REGISTRATION FOR COMMERCIAL USE
+   Before using the Software in production (processing real payments), you
+   MUST notify TerabitLab by email at:
+
+       incontact@terabitlab.com
+
+   Include: your business name, website URL, and intended use. You will
+   receive confirmation and, if applicable, license terms. Using the Software
+   commercially without prior email notification is a violation of this license.
+
+4. PROHIBITION OF REDISTRIBUTION FOR PROFIT
+   You may NOT sell, rent, lease, sublicense, or otherwise distribute the
+   Software or any derivative work for a fee, payment, or any form of
+   commercial compensation. This includes but is not limited to:
+   - Selling the Software as a standalone product
+   - Including the Software in a paid bundle, package, or collection
+   - Offering the Software as part of a paid service or subscription
+   - Charging for installation when the Software itself is the deliverable
+   - Distributing modified versions for payment
+
+5. MODIFICATION AND FREE REDISTRIBUTION
+   You may modify the Software and redistribute modifications under the same
+   terms of this license, provided that:
+   - Modified versions are clearly marked as modified
+   - The original copyright notice and this license are preserved
+   - No fee is charged for the distribution
+   - The mandatory registration requirement (section 3) still applies
+     to any commercial use of modified versions
+
+6. REFERRAL PROGRAM
+   A 15% referral commission is available for individuals who refer new
+   commercial licensees to TerabitLab. See the referral/ directory for
+   program details and claim forms.
+
+7. ATTRIBUTION
+   All copies or substantial portions of the Software must retain this
+   copyright notice, this license, and the following attribution:
+   "Developed by TerabitLab - incontact@terabitlab.com"
+
+8. COMMERCIAL LICENSE
+   For multi-site deployments, agency use, client installations, or any use
+   not covered by section 2, contact TerabitLab for a commercial license:
+   incontact@terabitlab.com
+
+9. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+   DEALINGS IN THE SOFTWARE.
+
+10. TERMINATION
+    This license is automatically terminated if you violate any of its terms.
+    Upon termination, you must cease all use of the Software and destroy all
+    copies in your possession.
