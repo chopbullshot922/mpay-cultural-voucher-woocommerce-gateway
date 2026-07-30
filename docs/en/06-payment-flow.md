@@ -127,7 +127,7 @@ Customer          Store                   MPay
 - Access to the test payment page
 - MPay test public certificate
 - Confirmation of the SOAP endpoint
-- IP or whitelist rules (if applicable)
+- MPay IP addresses (to whitelist on your server firewall)
 - Invoice API access (if used)
 - WS-Security algorithm confirmation
 - Cultural Voucher rules confirmation
@@ -139,12 +139,12 @@ Customer          Store                   MPay
 - Production endpoint registration
 - Registration of the merchant public certificate
 - MPay production public certificate
-- IP configuration (if required)
+- MPay production IP addresses (to whitelist on your server firewall)
 - API access on specific port (if used)
 - Service activation confirmation
 - Final controlled test
 
-### What can be sent to MPay
+### What to send to MPay
 
 - Public certificate (.cer or .pem)
 - CN
@@ -152,7 +152,7 @@ Customer          Store                   MPay
 - ServiceID
 - SOAP endpoint URL
 - ReturnUrl
-- Public IP (if needed)
+- Your server public IP address (MPay may require it for their whitelist)
 - Technical contact
 
 ## Production checklist
@@ -178,7 +178,8 @@ Customer          Store                   MPay
 - [ ] Public certificate registered with MPay
 - [ ] Fingerprint confirmed
 - [ ] MPay production public certificate received
-- [ ] Whitelist configured
+- [ ] MPay IP addresses whitelisted on server firewall
+- [ ] Server public IP communicated to MPay
 - [ ] API access (if used)
 - [ ] Cultural Voucher rules confirmed
 - [ ] Final test passed

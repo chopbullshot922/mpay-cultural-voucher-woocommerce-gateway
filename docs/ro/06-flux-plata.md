@@ -119,7 +119,7 @@ Confirmarea este idempotenta - daca MPay trimite aceeasi confirmare de mai multe
 - Acces la pagina de test
 - Certificatul public MPay de test
 - Confirmarea endpoint-ului SOAP al comerciantului
-- IP-uri sau reguli de whitelist (daca e cazul)
+- Adresele IP ale MPay (pentru whitelist pe firewall-ul serverului)
 - Acces la API-ul de facturi (daca este folosit)
 - Confirmarea algoritmilor WS-Security
 - Confirmarea regulilor Voucher Cultural
@@ -131,12 +131,12 @@ Confirmarea este idempotenta - daca MPay trimite aceeasi confirmare de mai multe
 - Inregistrarea endpoint-ului de productie
 - Inregistrarea certificatului public al comerciantului
 - Certificatul public MPay de productie
-- Configurarea IP-ului (daca este necesara)
+- Adresele IP MPay de productie (pentru whitelist pe firewall-ul serverului)
 - Accesul API pe portul specific (daca este folosit)
 - Confirmarea activarii serviciului
 - Test final controlat
 
-### Ce poate fi transmis MPay
+### Ce trebuie transmis la MPay
 
 - Certificatul public .cer sau .pem
 - CN
@@ -144,7 +144,7 @@ Confirmarea este idempotenta - daca MPay trimite aceeasi confirmare de mai multe
 - ServiceID
 - Endpoint SOAP
 - ReturnUrl
-- IP public (daca este necesar)
+- Adresa IP publica a serverului (MPay poate cere whitelist la ei)
 - Contact tehnic
 
 ## Checklist productie
@@ -170,7 +170,8 @@ Confirmarea este idempotenta - daca MPay trimite aceeasi confirmare de mai multe
 - [ ] Certificat public inregistrat
 - [ ] Fingerprint confirmat
 - [ ] Certificat public MPay productie primit
-- [ ] Whitelist configurat
+- [ ] IP-urile MPay trecute in whitelist pe firewall-ul serverului
+- [ ] IP-ul public al serverului comunicat la MPay
 - [ ] Acces API (daca e folosit)
 - [ ] Reguli Voucher Cultural confirmate
 - [ ] Test final trecut

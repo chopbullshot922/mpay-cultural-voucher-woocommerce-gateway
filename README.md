@@ -79,6 +79,8 @@ When MPay confirms your test integration is approved:
 - MPay production public certificate
 - HTTPS on your domain
 - MPay approval of your test integration
+- Your server public IP communicated to MPay (they may whitelist it)
+- MPay production IP addresses whitelisted on your server firewall
 
 All configuration is done from the plugin settings page. No code changes needed.
 

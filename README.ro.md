@@ -79,6 +79,8 @@ Când MPay confirmă că integrarea de test este aprobată:
 - Certificatul public MPay de producție
 - HTTPS pe domeniu
 - Aprobarea MPay a integrării de test
+- IP-ul public al serverului comunicat la MPay (pot face whitelist)
+- IP-urile MPay de producție trecute în whitelist pe firewall-ul serverului
 
 Toată configurarea se face din pagina de setări a pluginului. Nu sunt necesare modificări de cod.
 
